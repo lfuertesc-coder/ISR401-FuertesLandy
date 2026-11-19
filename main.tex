@@ -1,0 +1,164 @@
+\documentclass[11pt,a4paper]{article}
+
+% Paquetes para español, tablas y formato
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=1.55cm]{geometry}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{eso-pic}
+
+% Colores aproximados a los de las hojas
+\definecolor{titulorojo}{RGB}{190,75,75}
+\definecolor{textoazul}{RGB}{55,85,125}
+\definecolor{azulclaro}{RGB}{100,155,175}
+\definecolor{rejilla}{RGB}{232,232,232}
+
+% Cuadrícula suave de fondo, parecida al papel de las fotografías
+\AddToShipoutPictureBG{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[step=5mm,rejilla,line width=0.15pt]
+      (current page.south west) grid (current page.north east);
+  \end{tikzpicture}%
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\renewcommand{\arraystretch}{1.45}
+\setstretch{1.12}
+\arrayrulecolor{titulorojo}
+
+\newcommand{\titulo}[1]{{\color{titulorojo}\bfseries #1}}
+\newcommand{\respuesta}[1]{{\color{textoazul}#1}}
+\newcommand{\dato}[2]{\titulo{#1}~\respuesta{#2}}
+
+\begin{document}
+\color{textoazul}
+
+% ==================== HOJA 1 ====================
+\dato{Nombre:}{Fuertes Calvo Landy Lorena}\\
+\dato{Ing.:}{Gleiston Ulloa}
+
+\begin{center}
+  {\large\color{textoazul}Evaluación}
+\end{center}
+
+\vspace{0.15cm}
+\titulo{Introducción:}
+
+\vspace{1.75cm}
+\titulo{El problema:}
+
+\vspace{1.05cm}
+\titulo{T1: Concepto aplicados al caso.}
+
+\respuesta{\textbf{a)} Explique con sus palabras qué es un requisito según ISO/IEC/IEEE 29148 y, con esa explicación, decida si E7 y E12 son requisitos del producto FRIOVAC.}
+
+\vspace{0.12cm}
+\respuesta{El requisito debe decir algo que el sistema futuro pueda verificar, el E7 y E12 no es un requisito del producto.}
+
+\respuesta{E7 el responsable lee el termómetro de la refrigeradora a las 08:00 y a las 16:00 aquí no pide nada el sistema así que no se puede archivar FRIOVAC.}
+
+\respuesta{\textbf{b)} E12, dice como se hará el proyecto.}
+
+\vspace{0.12cm}
+\respuesta{\textbf{b)} Cada uno tiene una abstracción distinta.}
+
+\titulo{Para cada hecho H1 a H5:}
+
+\vspace{0.08cm}
+\begin{center}
+\begin{tabular}{|>{\centering\arraybackslash}p{1.2cm}|p{5.1cm}|p{4.0cm}|}
+\hline
+\rowcolor{titulorojo!12}
+\titulo{ID} & \titulo{Hecho} & \titulo{Tipo} \\
+\hline
+H1 & \respuesta{Elicitación} & \respuesta{Central} \\
+\hline
+H2 & \respuesta{Análisis y negociación} & \respuesta{Central} \\
+\hline
+H3 & \respuesta{Especificación} & \respuesta{Central} \\
+\hline
+H4 & \respuesta{Validación} & \respuesta{Transversal} \\
+\hline
+H5 & \respuesta{Gestión} & \respuesta{Transversal} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.25cm}
+\titulo{T2. Clasificación y auditoría}
+
+\newpage
+
+% ==================== HOJA 2 ====================
+\titulo{a) =}
+
+\vspace{0.12cm}
+\small
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.8cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\centering\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{titulorojo!12}
+\titulo{ID} & \titulo{Tipo} & \titulo{Documento} & \titulo{Justificación} \\
+\hline
+E1 & \respuesta{Funcional} & \respuesta{SIRS} & \respuesta{Sin canal ni plazo medible} \\
+\hline
+E2 & \respuesta{Requisito} & \respuesta{SIRS} & \respuesta{Se deriva por umbrales en SyRS} \\
+\hline
+E3 & \respuesta{Retención de interfaz} & \respuesta{SIRS} & \respuesta{Fija la frecuencia (10 min) y el protocolo de los dos elementos.} \\
+\hline
+E4 & \respuesta{Retención} & \respuesta{SIRS} & \respuesta{Límite de fecha} \\
+\hline
+E5 & \respuesta{Funcional} & \respuesta{SIRS} & \respuesta{Informe mensual} \\
+\hline
+E6 & \respuesta{No funcional} & \respuesta{SyRS} & \respuesta{Registrar cada 8 h.} \\
+\hline
+E7 & \respuesta{No es Requisito} & \respuesta{Ninguno} & \respuesta{T1 a.} \\
+\hline
+E8 & \respuesta{No funcional} & \respuesta{SIRS} & \respuesta{Usuario} \\
+\hline
+E9 & \respuesta{Restricción} & \respuesta{SIRS} & \respuesta{Linux no describe} \\
+\hline
+E10 & \respuesta{No funcional} & \respuesta{SIRS} & \respuesta{Solo personal autorizado} \\
+\hline
+E11 & \respuesta{No funcional} & \respuesta{SIRS} & \respuesta{Regula la Elicitación} \\
+\hline
+E12 & \respuesta{Requisito} & \respuesta{Ninguno} & \respuesta{} \\
+\hline
+\end{tabularx}
+\normalsize
+
+\vspace{0.25cm}
+\titulo{b): Auditoría:}
+
+\vspace{0.10cm}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.75cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\rowcolor{titulorojo!12}
+\titulo{ID} & \titulo{Término C.} & \shortstack[l]{\titulo{Característica}\\\respuesta{con verificacion}} & \shortstack[l]{\titulo{Propiedad}\\\respuesta{(Usabilidad)}} & \shortstack[l]{\titulo{Justificación}\\\respuesta{Usabilidad}} \\
+\hline
+B1 & \respuesta{Son rápidos} & \respuesta{} & \respuesta{} & \respuesta{} \\
+\hline
+B2 & \respuesta{Sin destinatario} & \respuesta{} & \respuesta{} & \respuesta{} \\
+\hline
+B3 & \respuesta{Sin destinatario} & \respuesta{} & \respuesta{} & \respuesta{} \\
+\hline
+B4 & \respuesta{Sin Energía} & \respuesta{} & \respuesta{} & \respuesta{} \\
+\hline
+B5 & \respuesta{(BD mensual) No ambiguo} & \respuesta{} & \respuesta{} & \respuesta{} \\
+\hline
+B6 & \respuesta{No ambiguo, sin destinatario} & \respuesta{} & \respuesta{} & \respuesta{} \\
+\hline
+\end{tabularx}
+\normalsize
+
+\end{document}
