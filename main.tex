@@ -1,164 +1,311 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 
-% Paquetes para español, tablas y formato
-\usepackage[spanish]{babel}
+% PAQUETES
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage[a4paper,margin=1.55cm]{geometry}
-\usepackage{xcolor}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
 \usepackage{array}
 \usepackage{tabularx}
-\usepackage{colortbl}
-\usepackage{setspace}
-\usepackage{tikz}
-\usepackage{eso-pic}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
 
-% Colores aproximados a los de las hojas
-\definecolor{titulorojo}{RGB}{190,75,75}
-\definecolor{textoazul}{RGB}{55,85,125}
-\definecolor{azulclaro}{RGB}{100,155,175}
-\definecolor{rejilla}{RGB}{232,232,232}
-
-% Cuadrícula suave de fondo, parecida al papel de las fotografías
-\AddToShipoutPictureBG{%
-  \begin{tikzpicture}[remember picture,overlay]
-    \draw[step=5mm,rejilla,line width=0.15pt]
-      (current page.south west) grid (current page.north east);
-  \end{tikzpicture}%
-}
-
+\geometry{margin=2.5cm}
+\renewcommand{\arraystretch}{1.3}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{3pt}
-\renewcommand{\arraystretch}{1.45}
-\setstretch{1.12}
-\arrayrulecolor{titulorojo}
+\setlength{\parskip}{6pt}
 
-\newcommand{\titulo}[1]{{\color{titulorojo}\bfseries #1}}
-\newcommand{\respuesta}[1]{{\color{textoazul}#1}}
-\newcommand{\dato}[2]{\titulo{#1}~\respuesta{#2}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% Colores pastel para las tablas
+\definecolor{azulP}{HTML}{C9DFF2}\definecolor{azulS}{HTML}{EEF5FB}
+\definecolor{lilaP}{HTML}{DDD3F0}\definecolor{lilaS}{HTML}{F4F0FA}
+\definecolor{verdeP}{HTML}{CDEBD4}\definecolor{verdeS}{HTML}{EEF8F0}
+\definecolor{duraznoP}{HTML}{FBDCC7}\definecolor{duraznoS}{HTML}{FEF3EC}
+\definecolor{rosaP}{HTML}{F7D2DA}\definecolor{rosaS}{HTML}{FDEFF2}
+\definecolor{amarilloP}{HTML}{FBEBB0}\definecolor{amarilloS}{HTML}{FFF9E6}
+
+% Marca visible para lo que falta. Antes de entregar no debe quedar ninguna:
+% buscar "Pendiente" en el PDF y en este archivo.
+\newcommand{\pend}[1]{\textcolor{red}{[Pendiente: #1]}}
 
 \begin{document}
-\color{textoazul}
 
-% ==================== HOJA 1 ====================
-\dato{Nombre:}{Fuertes Calvo Landy Lorena}\\
-\dato{Ing.:}{Gleiston Ulloa}
+% PORTADA
+\begin{titlepage}
+    \centering
 
-\begin{center}
-  {\large\color{textoazul}Evaluación}
-\end{center}
+    {\large \textbf{UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO}}\\[0.3cm]
+    {\large Facultad de Ciencias de la Computación}\\
+    {\large Carrera de Software}\\[1.5cm]
 
-\vspace{0.15cm}
-\titulo{Introducción:}
+    {\Large \textbf{INGENIERÍA DE REQUERIMIENTOS}}\\[0.5cm]
+  
 
-\vspace{1.75cm}
-\titulo{El problema:}
+    {\LARGE \textbf{GA-TL-02 -- FORM}}\\[0.9cm]
 
-\vspace{1.05cm}
-\titulo{T1: Concepto aplicados al caso.}
+  
 
-\respuesta{\textbf{a)} Explique con sus palabras qué es un requisito según ISO/IEC/IEEE 29148 y, con esa explicación, decida si E7 y E12 son requisitos del producto FRIOVAC.}
+    {\large \textbf{Taller de entrevista estructurada y design thinking aplicados al PFC}}\\[0.3cm]
+    {\normalsize Grupo: \textbf{BFLM}}\\
 
-\vspace{0.12cm}
-\respuesta{El requisito debe decir algo que el sistema futuro pueda verificar, el E7 y E12 no es un requisito del producto.}
+  
 
-\respuesta{E7 el responsable lee el termómetro de la refrigeradora a las 08:00 y a las 16:00 aquí no pide nada el sistema así que no se puede archivar FRIOVAC.}
+    \begin{flushleft}
+    
+        \textbf{Integrantes (solo quienes trabajaron):}
+        \begin{itemize}[noitemsep,topsep=2pt]
+            \item Basurto Anchaguano Jordan Steven
+            \item Fuertes Calvo Landy Lorena
+            \item Llerena Abril Angelina Julexy
+            \item Monserrate Ochoa Erick Ariel
+        \end{itemize}
+        \vspace{0.2cm}
+        \textbf{Nivel:} Cuarto semestre\\[0.4cm]
+        \textbf{Paralelo:} A\\[0.4cm]
+        \textbf{Docente:} Gleiston Cicerón Guerrero Ulloa, PhD\\[0.4cm]
+        \textbf{Modalidad:} Grupal\\[0.4cm]
+        \textbf{Fecha límite de entrega:} 20 de noviembre de 2026, 23:59
+    \end{flushleft}
+    \vfill
+    {\large Quevedo -- Ecuador}\\
+    {\large 2026}
 
-\respuesta{\textbf{b)} E12, dice como se hará el proyecto.}
+\end{titlepage}
 
-\vspace{0.12cm}
-\respuesta{\textbf{b)} Cada uno tiene una abstracción distinta.}
+% 1. CONTEXTO
+\section{Contexto del ejercicio}
 
-\titulo{Para cada hecho H1 a H5:}
+Proyecto de fin de carrera (PFC) usado: \textbf{UteqFit-AI} (Aplicación para inscribirse, controlar turnos y recomendar rutinas en el Gimnasio Universitario de la UTEQ).
 
-\vspace{0.08cm}
-\begin{center}
-\begin{tabular}{|>{\centering\arraybackslash}p{1.2cm}|p{5.1cm}|p{4.0cm}|}
-\hline
-\rowcolor{titulorojo!12}
-\titulo{ID} & \titulo{Hecho} & \titulo{Tipo} \\
-\hline
-H1 & \respuesta{Elicitación} & \respuesta{Central} \\
-\hline
-H2 & \respuesta{Análisis y negociación} & \respuesta{Central} \\
-\hline
-H3 & \respuesta{Especificación} & \respuesta{Central} \\
-\hline
-H4 & \respuesta{Validación} & \respuesta{Transversal} \\
-\hline
-H5 & \respuesta{Gestión} & \respuesta{Transversal} \\
-\hline
-\end{tabular}
-\end{center}
+Parte interesada entrevistada: Promotor responsable del Gimnasio Universitario de la UTEQ (Unidad de Bienestar Universitario -- UBU).
 
-\vspace{0.25cm}
-\titulo{T2. Clasificación y auditoría}
+Fecha y lugar del ensayo: viernes 20 de noviembre de 2026, 13:00, por Meet.
 
-\newpage
+Roles en el ensayo:
+\begin{itemize}[noitemsep]
+    \item Entrevistador: {Basurto Anchaguano Jordan Steven}.
+    \item Parte interesada (juego de roles): Basurto Anchaguano Jordan Steven.
+    \item Registro y observación: {Fuertes Calvo Landy Lorena}.
+\end{itemize}
 
-% ==================== HOJA 2 ====================
-\titulo{a) =}
+% 2. GUION
+\section{Guion de entrevista estructurada}
 
-\vspace{0.12cm}
+% Entre 12 y 15 preguntas, con apertura, bloques temáticos y cierre.
+% Preguntas abiertas, neutrales y simples (una idea por pregunta).
+
+\begingroup\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.8cm} >{\raggedright\arraybackslash}p{2.9cm} >{\raggedright\arraybackslash}p{6.2cm} >{\raggedright\arraybackslash}p{4.0cm}}
+\caption{Guion de entrevista estructurada al promotor del gimnasio}\\
+\rowcolor{azulP}\textbf{N.°} & \textbf{Tema} & \textbf{Pregunta} & \textbf{Qué se quiere saber} \\
+\endfirsthead
+\rowcolor{azulP}\textbf{N.°} & \textbf{Tema} & \textbf{Pregunta} & \textbf{Qué se quiere saber} \\
+\endhead
+\rowcolor{azulS}1 & Apertura & ¿Cuál es su trabajo aquí en el gimnasio y desde hace cuánto tiempo está encargado? & Conocer qué funciones cumple y su experiencia en el gimnasio. \\
+\rowcolor{white}2 & {    } Inscripción & Cuéntenos, ¿qué pasos sigue un estudiante desde que quiere inscribirse hasta que ya puede entrenar? & Conocer el recorrido completo actual del estudiante. \\
+\rowcolor{azulS}3 & {    }  Inscripción & ¿Qué problemas o atrasos les da trabajar con las hojas impresas de inscripción? & Identificar inconvenientes con el manejo de fichas físicas. \\
+\rowcolor{white}4 & {     } Inscripción & En la ficha física hay un apartado de observaciones para uso institucional, ¿qué información registran ahí? & Saber qué tipo de anotaciones administrativas realizan. \\
+\rowcolor{azulS}5 & {    } Horarios y cupos & La hoja tiene siete horarios de lunes a viernes, ¿cuántas personas caben como máximo en cada hora? & Saber el límite de aforo permitido por cada bloque horario. \\
+\rowcolor{white}6 & {     } Horarios y cupos & ¿Cómo manejan la situación cuando varios estudiantes eligen el mismo horario? & Conocer cómo distribuyen la demanda en las horas más concurridas. \\
+\rowcolor{azulS}7 & {      } Horarios y cupos & ¿De qué manera llevan el registro de los estudiantes que asisten cada día? & Conocer el método actual para controlar la asistencia diaria. \\
+\rowcolor{white}8 & {     } Horarios y cupos & ¿Qué sucede con el horario asignado a un estudiante cuando deja de asistir al gimnasio? & Conocer qué acciones toman frente a las inasistencias. \\
+\rowcolor{azulS}9 & {     } Salud y rutinas & ¿Qué información o evaluación previa realizan cuando un estudiante nuevo empieza a entrenar? & Saber si toman datos físicos o médicos adicionales a la ficha. \\
+\rowcolor{white}10 & ´{     } Salud y rutinas & ¿Cómo proceden cuando un estudiante indica en la ficha que tiene una lesión o condición médica? & Conocer los cuidados o protocolos que aplican ante condiciones físicas. \\
+\rowcolor{azulS}11 & {      } Salud y rutinas & ¿De qué manera consiguen o definen los estudiantes la rutina de ejercicios que van a realizar? & Saber cómo se establecen las rutinas sin asumir quién las diseña. \\
+\rowcolor{white}12 & {      } Salud y rutinas & ¿Qué tipo de informes o datos les solicita la Unidad de Bienestar Universitario sobre el gimnasio? & Conocer qué reportes periódicos deben entregar a la UBU. \\
+\rowcolor{azulS}13 & Cierre & De todas sus actividades diarias, ¿cuál considera que le toma más tiempo o esfuerzo, y qué le gustaría mejorar primero? & Identificar su principal dificultad operativa y su prioridad. \\
+\end{longtable}
+\endgroup
+
+% 3. CONSENTIMIENTO Y MANIFIESTO
+\section{Consentimiento informado y registro de evidencias}
+
+
+\subsection{Protocolo de consentimiento}
+
+Antes de iniciar el ensayo, se explicará al participante el propósito de la actividad y cómo se utilizará la información obtenida. Se le indicará que participará mediante un juego de roles, asumiendo el papel del promotor responsable del Gimnasio Universitario de la UTEQ, mientras uno de los integrantes del equipo realizará la entrevista.
+
+La actividad consiste en aplicar un guion de entrevista estructurada para practicar la formulación de preguntas y conocer las necesidades relacionadas con la gestión del gimnasio. Durante el ejercicio se realizará una grabación únicamente en audio, sin capturar imágenes ni videos, y solo si el participante autoriza expresamente.
+
+La información obtenida se utilizará con fines académicos para revisar el desarrollo de la entrevista, elaborar el mapa de empatía, definir el problema y realizar los ajustes necesarios al guion. La grabación y el consentimiento firmado se conservarán en una carpeta institucional privada, compartida con el docente. Estos archivos no se publicarán en el repositorio del equipo; únicamente se incluirán los datos necesarios para identificar y verificar las evidencias mediante el manifiesto correspondiente.
+
+La participación es voluntaria y no tiene calificación. El participante puede negarse a responder alguna pregunta, solicitar que se detenga la grabación o retirarse del ejercicio en cualquier momento, sin que esto genere consecuencias académicas. Asimismo, antes de comenzar, tendrá la oportunidad de expresar sus dudas y decidir si acepta participar y autoriza la grabación.
+
+Finalmente, se solicitará que marque su decisión en el formulario de consentimiento informado y que registre su firma. La entrevista únicamente comenzará cuando se haya confirmado su autorización para participar y, si corresponde, para grabar el audio.
+
+
+\subsection{Manifiesto de evidencias}
+
+El audio y el consentimiento firmado no se publican en este repositorio.
+Se guardan en una carpeta institucional privada (cuenta \texttt{@uteq.edu.ec})
+compartida con el docente. Aquí solo se registra el siguiente manifiesto.
+
+\begin{table}[H]
+\centering
 \small
-\renewcommand{\arraystretch}{1.12}
-\setlength{\tabcolsep}{4pt}
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.8cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\centering\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}X|}
-\hline
-\rowcolor{titulorojo!12}
-\titulo{ID} & \titulo{Tipo} & \titulo{Documento} & \titulo{Justificación} \\
-\hline
-E1 & \respuesta{Funcional} & \respuesta{SIRS} & \respuesta{Sin canal ni plazo medible} \\
-\hline
-E2 & \respuesta{Requisito} & \respuesta{SIRS} & \respuesta{Se deriva por umbrales en SyRS} \\
-\hline
-E3 & \respuesta{Retención de interfaz} & \respuesta{SIRS} & \respuesta{Fija la frecuencia (10 min) y el protocolo de los dos elementos.} \\
-\hline
-E4 & \respuesta{Retención} & \respuesta{SIRS} & \respuesta{Límite de fecha} \\
-\hline
-E5 & \respuesta{Funcional} & \respuesta{SIRS} & \respuesta{Informe mensual} \\
-\hline
-E6 & \respuesta{No funcional} & \respuesta{SyRS} & \respuesta{Registrar cada 8 h.} \\
-\hline
-E7 & \respuesta{No es Requisito} & \respuesta{Ninguno} & \respuesta{T1 a.} \\
-\hline
-E8 & \respuesta{No funcional} & \respuesta{SIRS} & \respuesta{Usuario} \\
-\hline
-E9 & \respuesta{Restricción} & \respuesta{SIRS} & \respuesta{Linux no describe} \\
-\hline
-E10 & \respuesta{No funcional} & \respuesta{SIRS} & \respuesta{Solo personal autorizado} \\
-\hline
-E11 & \respuesta{No funcional} & \respuesta{SIRS} & \respuesta{Regula la Elicitación} \\
-\hline
-E12 & \respuesta{Requisito} & \respuesta{Ninguno} & \respuesta{} \\
-\hline
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.2cm} p{2.4cm} p{2.0cm} Y}
+\rowcolor{duraznoP}\textbf{Archivo} & \textbf{Fecha} & \textbf{Duración} & \textbf{Huella SHA-256} \\
+\rowcolor{duraznoS}GA-TL-02\_ensayo\_2026-11-20.mpeg & 20/11/2026 & 06:03 & \texttt{\scriptsize a8cda27ec74b20ba75e1eeac96d08f03\allowbreak eff69557bd3581f997f71703c2f9d762} \\
 \end{tabularx}
-\normalsize
+\caption{Manifiesto de evidencias}
+\end{table}
 
-\vspace{0.25cm}
-\titulo{b): Auditoría:}
+% 4. REGISTRO DEL ENSAYO
+\section{Registro del ensayo}
 
-\vspace{0.10cm}
+El ensayo se realizó por Meet y duró 6 minutos con 3 segundos. Antes de empezar, el participante escuchó el consentimiento y aceptó participar y que se grabara el audio. La tabla resume, en el orden del guion, lo que respondió el promotor; las frases entre comillas se tomaron del audio.
+
+\begingroup\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.9cm} >{\raggedright\arraybackslash}p{13.4cm}}
+\caption{Respuestas clave del promotor en el ensayo}\\
+\rowcolor{verdeP}\textbf{P} & \textbf{Respuesta del promotor} \\
+\endfirsthead
+\rowcolor{verdeP}\textbf{P} & \textbf{Respuesta del promotor} \\
+\endhead
+\rowcolor{verdeS}P1 & Yo soy el encargado del gimnasio universitario, coordino las inscripciones, los horarios y lo que pide Bienestar Universitario. Lleva unos tres meses en el cargo. \\
+\rowcolor{white}P2 & El estudiante llena una hoja impresa con sus datos y el horario que quiere; el promotor la revisa y le asigna el turno. \\
+\rowcolor{verdeS}P3 & Al ser muchas se hace difícil manipular las hojas, porque a veces se pierden y toca buscarlas a mano. Pasar esa información también demora. \\
+\rowcolor{white}P4 & En observaciones anotan si falta algún dato, el horario asignado y cualquier novedad del estudiante. \\
+\rowcolor{verdeS}P5 &  Más o menos unas 20 personas por hora, según cuántas máquinas estén libres. \\
+\rowcolor{white}P6 & Intentan pasar a algunos estudiantes a otras horas; si no se puede, quedan en espera hasta que alguien deje de asistir. \\
+\rowcolor{verdeS}P7 & Tenemos una hoja de asistencia donde cada estudiante que llega firma. \\
+\rowcolor{white}P8 & Si el estudiante falta varias veces seguidas, pierde el turno y se asigna a otro. \\
+\rowcolor{verdeS}P9 & Casi nada, solo fichamos». A veces se pregunta de palabra si el estudiante tiene alguna molestia. \\
+\rowcolor{white}P10 & Le recomiendan ejercicios suaves y evitar algunas máquinas; si es algo serio, le piden consultar al médico de Bienestar. \\
+\rowcolor{verdeS}P11 & La mayoría pregunta a otros compañeros o repite lo que ve. El promotor da una orientación básica cuando puede. \\
+\rowcolor{white}P12 & Bienestar pide un informe mensual con el número de inscritos y cómo va la asistencia. \\
+\rowcolor{verdeS}P13 & A mí lo que más tiempo me quita es pasar las cosas y llevar la asistencia a mano. No respondió qué mejoraría primero. \\
+\end{longtable}
+\endgroup
+
+% 5. MAPA DE EMPATÍA
+\section{Mapa de empatía}
+
+El mapa se elaboró sobre el promotor del gimnasio, porque es la parte interesada entrevistada en el ensayo. Cada elemento indica entre corchetes la pregunta del guion de donde salió.
+
+\begin{table}[H]
+\centering
+\small
+\arrayrulecolor{white}
+\setlength{\arrayrulewidth}{3pt}
 \renewcommand{\arraystretch}{1.35}
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.75cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}X|}
+\begin{tabularx}{\textwidth}{|Y|Y|}
 \hline
-\rowcolor{titulorojo!12}
-\titulo{ID} & \titulo{Término C.} & \shortstack[l]{\titulo{Característica}\\\respuesta{con verificacion}} & \shortstack[l]{\titulo{Propiedad}\\\respuesta{(Usabilidad)}} & \shortstack[l]{\titulo{Justificación}\\\respuesta{Usabilidad}} \\
+\cellcolor{azulP}\textbf{Qué piensa} & \cellcolor{lilaP}\textbf{Qué siente} \\
 \hline
-B1 & \respuesta{Son rápidos} & \respuesta{} & \respuesta{} & \respuesta{} \\
+\cellcolor{azulS}
+\begin{itemize}[leftmargin=*,noitemsep,topsep=0pt,before=\vspace{-0.9\baselineskip},after=\vspace{-\baselineskip}]
+  \item La evaluación de los estudiantes nuevos es mínima P9.
+  \item Los estudiantes necesitan más orientación de la que él alcanza a dar P11.
+  \item Debe tener los datos de inscritos y asistencia listos cada mes P12.
+\end{itemize}
+&
+\cellcolor{lilaS}
+\begin{itemize}[leftmargin=*,noitemsep,topsep=0pt,before=\vspace{-0.9\baselineskip},after=\vspace{-\baselineskip}]
+  \item Carga por el trabajo manual y repetitivo P13.
+  \item Molestia cuando las hojas se pierden y debe buscarlas P3.
+  \item Preocupación por los estudiantes con lesiones P10.
+\end{itemize}
+\\
 \hline
-B2 & \respuesta{Sin destinatario} & \respuesta{} & \respuesta{} & \respuesta{} \\
+\cellcolor{verdeP}\textbf{Qué dice} & \cellcolor{duraznoP}\textbf{Qué hace} \\
 \hline
-B3 & \respuesta{Sin destinatario} & \respuesta{} & \respuesta{} & \respuesta{} \\
+\cellcolor{verdeS}
+\begin{itemize}[leftmargin=*,noitemsep,topsep=0pt,before=\vspace{-0.9\baselineskip},after=\vspace{-\baselineskip}]
+  \item  A veces se pierden y toca buscarlas a mano P3.
+  \item  Casi nada, solo fichamos» P9.
+  \item  La mayoría pregunta a otros compañeros o repite lo que ve P11.
+  \item  Lo que más tiempo me quita es pasar las cosas y llevar la asistencia a mano P13.
+\end{itemize}
+&
+\cellcolor{duraznoS}
+\begin{itemize}[leftmargin=*,noitemsep,topsep=0pt,before=\vspace{-0.9\baselineskip},after=\vspace{-\baselineskip}]
+  \item Revisa las hojas impresas y asigna turnos P2.
+  \item Reubica estudiantes o los deja en espera P6.
+  \item Controla la asistencia con una hoja firmada P7.
+  \item Quita el turno a quien falta seguido P8.
+  \item Deriva al médico de Bienestar los casos serios P10.
+  \item Prepara el informe mensual para Bienestar P12.
+\end{itemize}
+\\
 \hline
-B4 & \respuesta{Sin Energía} & \respuesta{} & \respuesta{} & \respuesta{} \\
+\multicolumn{2}{|>{\raggedright\arraybackslash}p{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth\relax}|}{\cellcolor{rosaS}\textbf{Dolores:} hojas que se pierden P3; pasar datos a mano es lento P3, P13; asistencia en papel P7; cupo limitado por las máquinas libres P5; más demanda que cupos, con estudiantes en espera P6; casi no hay evaluación previa P9.} \\
 \hline
-B5 & \respuesta{(BD mensual) No ambiguo} & \respuesta{} & \respuesta{} & \respuesta{} \\
-\hline
-B6 & \respuesta{No ambiguo, sin destinatario} & \respuesta{} & \respuesta{} & \respuesta{} \\
+\multicolumn{2}{|>{\raggedright\arraybackslash}p{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth\relax}|}{\cellcolor{amarilloS}\textbf{Ganancias esperadas:} dedicar menos tiempo al registro y la asistencia P13; encontrar rápido los datos de cada estudiante P3; tener lista la información del informe mensual P12; asignar turnos sin choques P6; que los estudiantes entrenen con orientación segura P10, P11.} \\
 \hline
 \end{tabularx}
-\normalsize
+\caption{Mapa de empatía del promotor del Gimnasio Universitario}
+\end{table}
 
+\section{Definición del problema}
+
+\textbf{Usuario:} promotor encargado del Gimnasio Universitario de la UTEQ.\\
+\textbf{Necesidad:} llevar inscripciones, turnos y asistencia sin pasar los datos a mano.\\
+\textbf{Hallazgo:} las hojas impresas se pierden, la asistencia en papel es lo que más tiempo le quita P3, P13 y cada mes debe reportar inscritos y asistencia a Bienestar P12.
+
+\textbf{¿Cómo podríamos} ayudar al promotor del Gimnasio Universitario a llevar las inscripciones, los turnos y la asistencia sin pasar los datos a mano, para que tenga lista la información del informe mensual y le quede más tiempo para orientar a los estudiantes\textbf{?}
+
+% 6. AJUSTES
+\section{Ajustes al guion}
+
+Los ajustes se identificaron en una revisión previa del guion, antes del ensayo.
+La columna Origen distingue estas correcciones de las que surjan al aplicar
+el guion en el ensayo. La pregunta P10 se revisó y se mantiene sin cambios.
+
+\begingroup\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{4.2cm} >{\raggedright\arraybackslash}p{3.4cm} >{\raggedright\arraybackslash}p{5.2cm} >{\raggedright\arraybackslash}p{1.9cm}}
+\caption{Preguntas con defectos y su versión corregida}\\
+\rowcolor{lilaP}\textbf{Pregunta original} & \textbf{Defecto} & \textbf{ Corregido} & \textbf{Origen} \\
+\endfirsthead
+\rowcolor{lilaP}\textbf{Pregunta original} & \textbf{Defecto} & \textbf{Corregido} & \textbf{Origen} \\
+\endhead
+\rowcolor{lilaS}P1. ¿Cuál es su trabajo aquí en el gimnasio y desde hace cuánto tiempo está encargado? & Es doble: pregunta por su trabajo y por cuánto tiempo lleva a cargo. & (a) Cuéntenos, ¿qué funciones cumple usted en el gimnasio?\par\smallskip (b) ¿Cómo ha sido su trayectoria desde que está encargado del gimnasio? & Revisión previa \\
+\rowcolor{white}P3. ¿Qué problemas o atrasos les da trabajar con las hojas impresas de inscripción? & Es inductiva y doble: da por hecho que existen problemas y pregunta por problemas o atrasos. & ¿Cómo es su experiencia trabajando con las hojas impresas de inscripción? & Revisión previa \\
+\rowcolor{lilaS}P5. La hoja tiene siete horarios de lunes a viernes, ¿cuántas personas caben como máximo en cada hora? & Es cerrada, porque se responde con un solo número. También da por hecho que el cupo es igual en todas las horas. & ¿Cómo determinan cuántas personas pueden entrenar al mismo tiempo en cada horario? & Revisión previa \\
+\rowcolor{white}P9. ¿Qué información o evaluación previa realizan cuando un estudiante nuevo empieza a entrenar? & Es inductiva y doble: da por hecho que hacen una evaluación previa y pregunta por información o evaluación». & Cuéntenos, ¿qué ocurre con un estudiante nuevo antes de su primera sesión de entrenamiento? & Revisión previa \\
+\rowcolor{lilaS}P11. ¿De qué manera consiguen o definen los estudiantes la rutina de ejercicios que van a realizar? & Es doble: pregunta si los estudiantes consiguen o definen» la rutina. & ¿Cómo se decide la rutina de ejercicios que hace cada estudiante? & Revisión previa \\
+\rowcolor{white}P12. ¿Qué tipo de informes o datos les solicita la Unidad de Bienestar Universitario sobre el gimnasio? & Es inductiva y doble: da por hecho que la UBU pide informes y pregunta por informes o datos. & ¿Qué información le solicita, si es el caso, la Unidad de Bienestar Universitario sobre el gimnasio? & Revisión previa \\
+\rowcolor{lilaS}P13. De todas sus actividades diarias, ¿cuál considera que le toma más tiempo o esfuerzo, y qué le gustaría mejorar primero? & Es doble: pregunta qué le toma más tiempo o esfuerzo, y también qué quiere mejorar primero. & (a) Cuéntenos, ¿qué actividad de su día a día en el gimnasio le exige más esfuerzo?\par\smallskip (b) Si pudiera cambiar algo de cómo trabajan hoy, ¿qué cambiaría primero? & Revisión previa \\
+\end{longtable}
+\endgroup
+
+\subsection*{Lo que mostró el ensayo}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{P13} confirmó el defecto de pregunta doble: el promotor respondió solo qué le quita más tiempo y no dijo qué mejoraría primero. La versión corregida separa ambas partes.
+  \item \textbf{P9} confirmó que la pregunta daba por hecha una evaluación previa: la respuesta fue «casi nada, solo fichamos».
+  \item \textbf{P5} se respondió con una cifra aproximada y una condición («depende de cuántas máquinas estén libres»), lo que confirma que la versión original era cerrada.
+  \item Aparecieron dos temas que el guion no profundiza: la \textbf{lista de espera} [P6] y \textbf{cómo se elabora el informe mensual} [P12]. Para no superar las 15 preguntas, se abordarán como repreguntas de P6 y P12 en la entrevista real.
+\end{itemize}
+
+% 7. DECLARACIÓN DE USO DE IA
+\section{Declaración de uso de herramientas de IA}
+
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.0cm} Y}
+\rowcolor{rosaS}\textbf{Herramienta:} & Claude (Anthropic), modelo Claude Opus 5.5. \\
+\rowcolor{rosaS}\textbf{Propósito:} & Apoyo para ordenar las respuestas del ensayo en las secciones de registro, mapa de empatía y \LaTeX{} de las tablas. \\
+\rowcolor{rosaS}\textbf{Verificación:} & El equipo comparó cada frase y cada elemento del mapa con el audio del ensayo,y corregimos los errrores y se reviso que el documento compile bien \\
+\end{tabularx}
+
+% 8. PARTICIPACIÓN
+\section{Participación de los integrantes}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{5.5cm} Y}
+\rowcolor{amarilloP}\textbf{Integrante} & \textbf{Parte realizada} \\
+\rowcolor{amarilloS}Basurto Anchaguano Jordan Steven & {se encargo de la entrevista} \\
+\rowcolor{white}Fuertes Calvo Landy Lorena & Registro del ensayo, mapa de empatía, definición del problema y resultados del ensayo en los ajustes. \\
+\rowcolor{amarilloS}Llerena Abril Angelina Julexy & {correcciones y del consentimiento} \\
+\rowcolor{white}Monserrate Ochoa Erick Ariel & {junto todo hizo el meet,y el documento} \\
+\end{tabularx}
+
+\end{table}
 \end{document}
