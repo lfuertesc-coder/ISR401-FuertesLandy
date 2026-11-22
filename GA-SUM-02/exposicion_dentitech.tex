@@ -1,0 +1,138 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\definecolor{CelesteSuave}{RGB}{214, 238, 248}
+\definecolor{CelesteBorde}{RGB}{145, 198, 222}
+\definecolor{TextoOscuro}{RGB}{25, 45, 60}
+
+\setbeamercolor{structure}{fg=CelesteBorde}
+\setbeamercolor{palette primary}{bg=CelesteSuave,fg=TextoOscuro}
+\setbeamercolor{palette secondary}{bg=CelesteSuave,fg=TextoOscuro}
+\setbeamercolor{palette tertiary}{bg=CelesteSuave,fg=TextoOscuro}
+\setbeamercolor{frametitle}{bg=CelesteSuave,fg=TextoOscuro}
+\setbeamercolor{block title}{bg=CelesteSuave,fg=TextoOscuro}
+\setbeamercolor{block body}{bg=white,fg=TextoOscuro}
+\setbeamercolor{normal text}{fg=TextoOscuro,bg=white}
+
+
+\subtitle{Proyecto DentiTech  Clínica Odontológica Medicus}
+\author{Nombre:Fuertes Clavo Landy Lorena}
+
+\institute{Universidad Tecnica Estatal De Quevedo}
+\date{}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{ Proyecto  DentiTech}
+  \begin{itemize}
+    \item \textbf{Lugar:} Clínica Odontológica Medicus (En la Cooperativa Jet, Quevedo).
+    \item \textbf{Funciones:} Agenda de citas, historia clínica odontológica (odontograma, diagnósticos, evoluciones), control de insumos y registro de pagos y saldos pendientes.
+    \item \textbf{No incluye:} Integración directa con equipos de rayos X ni plataformas bancarias externas ,solo registro de referencias o comprobantes.
+    \item \textbf{Condiciones clave:} Confidencialidad de datos de salud (LOPDP), normativa sanitaria aplicable y tiempo acotado del proyecto.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{1. Elicitación : Entrevista Semiestructurada}
+  \begin{block}{Pasos de aplicación}
+    \begin{enumerate}
+      \item Definir objetivos y actores clave (Recepción, Administración, Caja).
+      \item Preparar guía de preguntas abiertas sin sesgos.
+      \item Ejecutar la entrevista y registrar hallazgos respetando confidencialidad.
+      \item Resumir y validar requisitos con el actor.
+    \end{enumerate}
+  \end{block}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Ventajas:} Profundiza en flujos reales (citas, abonos, cierres) y destapa reglas implícitas.
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Limitaciones:} Poca disponibilidad horaria del personal; posible sesgo o vacíos.
+    \end{column}
+  \end{columns}
+  \vspace{0.2cm}
+  \textbf{Cuándo usarla:} Al inicio, para entender procesos operativos y excepciones del negocio.
+\end{frame}
+
+\begin{frame}{2. Elicitación : Prototipado Rápido}
+  \begin{block}{Pasos de aplicación}
+    \begin{enumerate}
+      \item Elegir pantallas o flujos críticos (agenda, odontograma, registro de insumos).
+      \item Crear boceto o prototipo de baja/media fidelidad.
+      \item Probar con usuarios (Odontólogo, Higienista, Recepción) en tareas concretas.
+      \item Ajustar requisitos y pantallas según la retroalimentación.
+    \end{enumerate}
+  \end{block}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Ventajas:} Evita malentendidos visuales temprano y valida agilidad en consulta.
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Limitaciones:} Riesgo de que se confunda con el sistema final o se priorice solo lo estético.
+    \end{column}
+  \end{columns}
+  \vspace{0.2cm}
+  \textbf{Cuándo usarla:} Cuando hay ambigüedad en interfaces/flujos o necesidad de validación visual.
+\end{frame}
+
+\begin{frame}{3. Comparación de Herramientas Automatizadas de Apoyo a la IR}
+  \scriptsize
+  \begin{tabular}{p{2.2cm} p{5.5cm} p{5.5cm}}
+    \toprule
+    \textbf{Criterio} & \textbf{Modelado / Gestión (CASE)} & \textbf{IA Generativa / Apoyo NLP} \\
+    \midrule
+    \textbf{Ejemplos} & Draw.io / Lucidchart / Jira & Asistente LLM (redacción y revisión) \\
+    \textbf{Funcionalidades} & Diagramas de contexto/flujo, trazabilidad, estados y seguimiento & Borradores de requisitos/historias, detección de ambigüedades, síntesis \\
+    \textbf{Madurez} & Alta: herramientas estables y consolidadas & Media-alta como apoyo; requiere validación humana estricta \\
+    \textbf{Casos reales} & Mantener alcance, diagramas y tareas ordenadas & Estructurar notas crudas y detectar frases ambiguas o incompletas \\
+    \bottomrule
+  \end{tabular}
+  \vspace{0.25cm}
+  \textbf{Punto clave:} Las herramientas apoyan; la validación con los actores y la normativa son obligatorias.
+\end{frame}
+
+\begin{frame}{4. Demostración  de las Herramientas}
+  \begin{itemize}
+    \item \textbf{Entrada de ejemplo (DentiTech):} \textit{``El sistema debe permitir agendar citas rápido, avisar al paciente para que no falte y que el odontólogo anote lo del diente y lo que pagó.''}
+    \item \textbf{Pasos mostrados en la demo (1--2 min):}
+      \begin{enumerate}
+        \item Ingreso de la necesidad inicial en la herramienta.
+        \item Separación en requisitos funcionales, reglas de negocio y criterios verificables (o modelado de flujo/tablero).
+        \item Revisión crítica: eliminar ambigüedades y verificar cumplimiento con LOPDP y reglas clínicas.
+      \end{enumerate}
+    \item \textbf{Respaldo:} Capturas/video corto incluidos en \texttt{/GA-SUM-02/} por prevención.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{5. Recomendación  para DentiTech}
+  \begin{itemize}
+    \item \textbf{Técnicas:} Combinar \textbf{entrevistas semiestructuradas} (citas, abonos, inventario con poco tiempo del personal) y \textbf prototipado rápido (odontograma, ficha y agenda ágil).
+    \item \textbf{Herramientas:} Usar  modelado,gestión para orden y trazabilidad, e \textbf IA NLP solo como borrador y detector de ambigüedades.
+    \item \textbf{Límite crítico:} No delegar a la IA reglas clínicas, lógica de cobros,abonos  privacidad de datos de salud (LOPDP) sin revisión humana y validación formal.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias }
+  \begin{itemize}
+    \item \textbf{IREB} (2026 / CPRE FL v3.1). \textit{Requirements Engineering Foundation Level Syllabus}.
+    \item \textbf{Pohl, K.} (2025). \textit{Requirements Engineering}.
+    \item \textbf{Wiegers, K., \& Beatty, J.} (2013). \textit{Software Requirements} (Cap. 7: Elicitación).
+  \end{itemize}
+  \vspace{0.3cm}
+  \centering
+  \textbf{Gracias por su atención .}
+\end{frame}
+
+\end{document}
